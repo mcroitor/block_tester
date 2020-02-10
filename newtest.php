@@ -35,6 +35,7 @@ $mform = new newtest_form();
 //Form processing and displaying is done here
 if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
+    redirect(new moodle_url('/course/view.php', array('id' => $courseid))); 
 } else if ($fromform = $mform->get_data()) {
     //In this case you process validated data. $mform->get_data() returns data posted in form.
     

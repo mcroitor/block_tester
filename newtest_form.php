@@ -6,10 +6,14 @@ class newtest_form extends moodleform {
 
     public function definition() {
         global $DB;
-        global $courseid;
+        global $courseid, $blockid;
 
         $mform = $this->_form; // Don't forget the underscore!
 
+        $mform->addElement("hidden", "courseid", $courseid);
+        $mform->setType("courseid", PARAM_INT);
+        $mform->addElement("hidden", "blockid", $blockid);
+        $mform->setType("blockid", PARAM_INT);
         $mform->addElement('header', 'configheader', 'Common options');
         // test name
         $mform->addElement('text', 'pagetitle', "Test Name"); //get_string('pagetitle', 'block_simplehtml'));
@@ -28,9 +32,18 @@ class newtest_form extends moodleform {
             }
         }
 
-        $mform->addElement('select', 'type', "Specify category", $list_categories);
-
+        $mform->addElement('select', 'category', "Specify category", $list_categories);
         // textbox nr. questions
+        $mform->addElement("text", "nr_all_questions", "Total questions (from {$nr_all_questions})");
+        $mform->setType("nr_all_questions", PARAM_INT);
+        $mform->addElement("text", "nr_binary_questions", "Binary questions");
+        $mform->setType("nr_binary_questions", PARAM_INT);
+        $mform->addElement("text", "nr_single_questions", "Single choice questions");
+        $mform->setType("nr_single_questions", PARAM_INT);
+        $mform->addElement("text", "nr_multiple_questions", "Multiple choice questions");
+        $mform->setType("nr_multiple_questions", PARAM_INT);
+        $mform->addElement("text", "nr_short_questions", "Short answer questions");
+        $mform->setType("nr_short_questions", PARAM_INT);
         
         $this->add_action_buttons();
     }
